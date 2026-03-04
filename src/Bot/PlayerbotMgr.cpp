@@ -4,6 +4,7 @@
  */
 
 #include "PlayerbotMgr.h"
+#include "PlayerbotModAPI.h"
 
 #include <cstdio>
 #include <cstring>
@@ -1759,6 +1760,7 @@ void PlayerbotsMgr::AddPlayerbotData(Player* player, bool isBotAI)
         }
         PlayerbotAI* botAI = new PlayerbotAI(player);
         ASSERT(_playerbotsAIMap.emplace(player->GetGUID(), botAI).second);
+        sPlayerbotModAPI.TriggerOnBotLogin(player);
     }
 }
 
@@ -1766,6 +1768,11 @@ void PlayerbotsMgr::RemovePlayerBotData(ObjectGuid const& guid, bool is_AI)
 {
     if (is_AI)
     {
+        if (Player* player = ObjectAccessor::FindConnectedPlayer(guid))
+        {
+            sPlayerbotModAPI.TriggerOnBotLogout(player);
+        }
+
         std::unordered_map<ObjectGuid, PlayerbotAIBase*>::iterator itr = _playerbotsAIMap.find(guid);
         if (itr != _playerbotsAIMap.end())
         {
