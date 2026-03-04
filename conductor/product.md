@@ -24,3 +24,4 @@ To create the most realistic and performant player-bot experience for AzerothCor
 - **Battleground & PvP:** Bots participating in world PvP and structured battlegrounds.
 - **Chat Command System:** An intuitive command-based interface for controlling bots.
 - **Addon Integration:** Support for in-game UIs to manage bot groups.
+- **External API & Modular Extensibility:** A comprehensive C++ API allowing external modules to register custom AI strategies, actions, and triggers, and react to bot lifecycle events.
