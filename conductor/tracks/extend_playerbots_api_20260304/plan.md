@@ -22,7 +22,7 @@ Refactor existing context logic to allow external modules to register custom act
     - [x] Implement `PlayerbotModAPI::AddStrategyToBot(guid, strategy_name)`.
 - [x] Task: Conductor - User Manual Verification 'Action & Strategy Registration API' (Protocol in workflow.md)
 
-## Phase 3: External Access & Documentation
+## Phase 3: External Access & Documentation [checkpoint: 60f1175]
 
 ### Goal
 Finalize the API for external use and provide documentation for module developers.
@@ -32,4 +32,4 @@ Finalize the API for external use and provide documentation for module developer
 - [x] Task: Write a README-API.md for the `mod-playerbots` module. [f78e737]
     - [x] Document the available hooks and registration methods.
     - [x] Provide a code snippet example for a simple "Hello Bot" external module.
-- [ ] Task: Conductor - User Manual Verification 'External Access & Documentation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'External Access & Documentation' (Protocol in workflow.md)
