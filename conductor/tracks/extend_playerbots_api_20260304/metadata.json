@@ -1,0 +1,8 @@
+{
+  "track_id": "extend_playerbots_api_20260304",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-03-04T10:00:00Z",
+  "updated_at": "2026-03-04T10:00:00Z",
+  "description": "Extend mod-playerbots to provide an API and hooks for external modules, enabling standalone bot-based modules like mod-guild-gatherers."
+}
