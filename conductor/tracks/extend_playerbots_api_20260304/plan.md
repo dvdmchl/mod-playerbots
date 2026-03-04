@@ -1,6 +1,6 @@
 # Plan: Extend mod-playerbots API
 
-## Phase 1: Core Hook System Implementation
+## Phase 1: Core Hook System Implementation [checkpoint: b0b19d6]
 
 ### Goal
 Implement the initial bot lifecycle hooks and the primary singleton interface for external modules.
@@ -9,7 +9,7 @@ Implement the initial bot lifecycle hooks and the primary singleton interface fo
     - [x] Implement `PlayerbotModAPI` singleton in a new file `src/Bot/PlayerbotModAPI.h`.
 - [x] Task: Integrate `OnBotLogin` and `OnBotLogout` hooks into `PlayerbotMgr`. [0c06a22]
     - [x] Modify `PlayerbotMgr::AddPlayerbot` and `PlayerbotMgr::RemovePlayerbot` to trigger the new hooks.
-- [ ] Task: Conductor - User Manual Verification 'Core Hook System Implementation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Core Hook System Implementation' (Protocol in workflow.md)
 
 ## Phase 2: Action & Strategy Registration API
 
