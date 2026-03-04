@@ -3,8 +3,8 @@
  * and/or modify it under version 3 of the License, or (at your option), any later version.
  */
 
-#ifndef _PLAYERBOT_PLAYERBOTAPI_H
-#define _PLAYERBOT_PLAYERBOTAPI_H
+#ifndef MOD_PLAYERBOTS_SRC_PLAYERBOTAPI_H_
+#define MOD_PLAYERBOTS_SRC_PLAYERBOTAPI_H_
 
 /**
  * Umbrella header for mod-playerbots API.
