@@ -4,5 +4,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Extend mod-playerbots to allow for standalone bot-based modules**
+- [x] **Track: Extend mod-playerbots to allow for standalone bot-based modules**
   *Link: [./conductor/tracks/extend_playerbots_api_20260304/](./conductor/tracks/extend_playerbots_api_20260304/)*
