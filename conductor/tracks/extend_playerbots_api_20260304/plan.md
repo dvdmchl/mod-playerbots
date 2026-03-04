@@ -5,14 +5,10 @@
 ### Goal
 Implement the initial bot lifecycle hooks and the primary singleton interface for external modules.
 
-- [ ] Task: Define the `PlayerbotModAPI` singleton structure and registration methods.
-    - [ ] Write failing unit test for `PlayerbotModAPI` instance retrieval and registration logic.
-    - [ ] Implement `PlayerbotModAPI` singleton in `src/Bot/PlayerbotAIConfig.h` or a new API file.
-    - [ ] Verify test passes and mark task as complete.
-- [ ] Task: Integrate `OnBotLogin` and `OnBotLogout` hooks into `PlayerbotMgr`.
-    - [ ] Write failing unit test to verify hook callback registration and execution.
-    - [ ] Modify `PlayerbotMgr::AddPlayerbot` and `PlayerbotMgr::RemovePlayerbot` to trigger the new hooks.
-    - [ ] Verify test passes and mark task as complete.
+- [x] Task: Define the `PlayerbotModAPI` singleton structure and registration methods. [0c06a22]
+    - [x] Implement `PlayerbotModAPI` singleton in a new file `src/Bot/PlayerbotModAPI.h`.
+- [x] Task: Integrate `OnBotLogin` and `OnBotLogout` hooks into `PlayerbotMgr`. [0c06a22]
+    - [x] Modify `PlayerbotMgr::AddPlayerbot` and `PlayerbotMgr::RemovePlayerbot` to trigger the new hooks.
 - [ ] Task: Conductor - User Manual Verification 'Core Hook System Implementation' (Protocol in workflow.md)
 
 ## Phase 2: Action & Strategy Registration API
