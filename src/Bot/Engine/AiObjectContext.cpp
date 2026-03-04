@@ -5,6 +5,11 @@
 
 #include "AiObjectContext.h"
 #include "Helpers.h"
+#include "PlayerbotModAPI.h"
+
+#include "ActionContext.h"
+#include "ChatActionContext.h"
+#include "ChatTriggerContext.h"
 #include "DKAiObjectContext.h"
 #include "DruidAiObjectContext.h"
 #include "HunterAiObjectContext.h"
@@ -104,7 +109,15 @@ void AiObjectContext::Load(std::vector<std::string> data)
 
 Strategy* AiObjectContext::GetStrategy(std::string const name)
 {
-    return strategyContexts.GetContextObject(name, botAI);
+    Strategy* strategy = strategyContexts.GetContextObject(name, botAI);
+    if (!strategy)
+    {
+        if (StrategyCreator creator = sPlayerbotModAPI.GetStrategyCreator(name))
+        {
+            strategy = creator(botAI);
+        }
+    }
+    return strategy;
 }
 
 std::set<std::string> AiObjectContext::GetSiblingStrategy(std::string const name)
@@ -112,9 +125,31 @@ std::set<std::string> AiObjectContext::GetSiblingStrategy(std::string const name
     return strategyContexts.GetSiblings(name);
 }
 
-Trigger* AiObjectContext::GetTrigger(std::string const name) { return triggerContexts.GetContextObject(name, botAI); }
+Trigger* AiObjectContext::GetTrigger(std::string const name) 
+{ 
+    Trigger* trigger = triggerContexts.GetContextObject(name, botAI); 
+    if (!trigger)
+    {
+        if (TriggerCreator creator = sPlayerbotModAPI.GetTriggerCreator(name))
+        {
+            trigger = creator(botAI);
+        }
+    }
+    return trigger;
+}
 
-Action* AiObjectContext::GetAction(std::string const name) { return actionContexts.GetContextObject(name, botAI); }
+Action* AiObjectContext::GetAction(std::string const name) 
+{ 
+    Action* action = actionContexts.GetContextObject(name, botAI); 
+    if (!action)
+    {
+        if (ActionCreator creator = sPlayerbotModAPI.GetActionCreator(name))
+        {
+            action = creator(botAI);
+        }
+    }
+    return action;
+}
 
 UntypedValue* AiObjectContext::GetUntypedValue(std::string const name)
 {
@@ -123,9 +158,27 @@ UntypedValue* AiObjectContext::GetUntypedValue(std::string const name)
 
 std::set<std::string> AiObjectContext::GetValues() { return valueContexts.GetCreated(); }
 
-std::set<std::string> AiObjectContext::GetSupportedStrategies() { return strategyContexts.supports(); }
+std::set<std::string> AiObjectContext::GetSupportedStrategies() 
+{ 
+    std::set<std::string> names = strategyContexts.supports(); 
+    std::vector<std::string> dynamicNames = sPlayerbotModAPI.GetRegisteredStrategies();
+    for (std::string const& name : dynamicNames)
+    {
+        names.insert(name);
+    }
+    return names;
+}
 
-std::set<std::string> AiObjectContext::GetSupportedActions() { return actionContexts.supports(); }
+std::set<std::string> AiObjectContext::GetSupportedActions() 
+{ 
+    std::set<std::string> names = actionContexts.supports(); 
+    std::vector<std::string> dynamicNames = sPlayerbotModAPI.GetRegisteredActions();
+    for (std::string const& name : dynamicNames)
+    {
+        names.insert(name);
+    }
+    return names;
+}
 
 std::string const AiObjectContext::FormatValues()
 {
