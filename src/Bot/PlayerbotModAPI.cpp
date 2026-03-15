@@ -4,9 +4,19 @@
  */
 
 #include "PlayerbotModAPI.h"
+
+#include "ObjectAccessor.h"
 #include "PlayerbotAI.h"
 #include "PlayerbotMgr.h"
-#include "ObjectAccessor.h"
+
+bool PlayerbotModAPI::TriggerChatCommandHandlers(Player* requester, Player* bot, uint32 type, std::string& msg)
+{
+    for (auto& hook : chat_command_hooks_)
+        if (hook(requester, bot, type, msg))
+            return true;
+
+    return false;
+}
 
 void PlayerbotModAPI::AddStrategyToBot(ObjectGuid botGuid, std::string const name, BotState type)
 {
@@ -15,9 +25,7 @@ void PlayerbotModAPI::AddStrategyToBot(ObjectGuid botGuid, std::string const nam
         if (PlayerbotAI* ai = sPlayerbotsMgr.GetPlayerbotAI(bot))
         {
             if (!ai->HasStrategy(name, type))
-            {
                 ai->ChangeStrategy("+" + name, type);
-            }
         }
     }
 }
@@ -29,9 +37,7 @@ void PlayerbotModAPI::RemoveStrategyFromBot(ObjectGuid botGuid, std::string cons
         if (PlayerbotAI* ai = sPlayerbotsMgr.GetPlayerbotAI(bot))
         {
             if (ai->HasStrategy(name, type))
-            {
                 ai->ChangeStrategy("-" + name, type);
-            }
         }
     }
 }

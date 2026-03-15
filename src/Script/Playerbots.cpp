@@ -25,6 +25,7 @@
 #include "GuildTaskMgr.h"
 #include "PlayerScript.h"
 #include "PlayerbotAIConfig.h"
+#include "PlayerbotModAPI.h"
 #include "PlayerbotGuildMgr.h"
 #include "PlayerbotSpellRepository.h"
 #include "PlayerbotWorldThreadProcessor.h"
@@ -197,6 +198,9 @@ public:
         {
             return true;
         }
+
+        if (sPlayerbotModAPI.TriggerChatCommandHandlers(player, receiver, type, msg))
+            return false;
 
         botAI->HandleCommand(type, msg, player);
 

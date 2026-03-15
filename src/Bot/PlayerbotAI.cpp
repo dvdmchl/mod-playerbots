@@ -4,6 +4,7 @@
  */
 
 #include "PlayerbotAI.h"
+#include "PlayerbotModAPI.h"
 
 #include <cmath>
 #include <mutex>
@@ -243,6 +244,10 @@ void PlayerbotAI::UpdateAI(uint32 elapsed, bool minimal)
     // Early return if bot is in invalid state
     if (!bot || !bot->GetSession() || !bot->IsInWorld() || bot->IsBeingTeleported() ||
         bot->GetSession()->isLogingOut() || bot->IsDuringRemoveFromWorld())
+        return;
+
+    // Allow external modules to intercept AI updates
+    if (!sPlayerbotModAPI.TriggerOnUpdate(bot, elapsed))
         return;
 
     // Handle cheat options (set bot health and power if cheats are enabled)
